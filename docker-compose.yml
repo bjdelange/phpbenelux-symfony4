@@ -1,0 +1,29 @@
+version: '2.1'
+# to start the docker cluster: docker-compose up -d
+# to stop the docker cluster: docker-compose stop
+# to enter a container bash: docker exec -t -i container_name /bin/bash
+services:
+    sf4web:
+        image: nginx:1.13
+        ports:
+            # links through to sf4php
+            - "8085:80"
+        volumes:
+            - ./:/var/www:cached
+            - ./docker/nginx-site.conf:/etc/nginx/conf.d/default.conf:cached
+            - ./docker/nginx.conf:/etc/nginx/nginx.conf:cached
+        depends_on:
+            - sf4php
+        links:
+            - sf4php
+    sf4php:
+        image: registry.nostradamus.nu/development/docker/php7-fpm-dev:1.1
+        volumes:
+            - ./:/var/www:cached
+            - ./docker/php.conf:/usr/local/etc/php-fpm.d/www.conf:cached
+        environment:
+            - ENVIRONMENT=develop
+networks:
+    default:
+        external:
+            name: nostradamus
