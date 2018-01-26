@@ -21,9 +21,12 @@ services:
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
         resource: '../src/Controller'
-#        tags: ['controller.service_arguments']
-        public: true
+        tags: ['controller.service_arguments']
+#        public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    Symfony\Component\Routing\Generator\UrlGeneratorInterface: '@App\CustomRouter'
+    #Symfony\Component\Routing\Generator\UrlGeneratorInterface: '@App\CustomRouter'
+    App\Controller\HelloWorldController:
+        $test: 'joehoe'
+#        $router: '@App\CustomRouter'

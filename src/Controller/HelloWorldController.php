@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class HelloWorldController
+class HelloWorldController extends Controller
 {
     /**
      * @var Environment
@@ -19,10 +20,16 @@ class HelloWorldController
      */
     private $router;
 
-    public function __construct(Environment $twig, UrlGeneratorInterface $router)
+    /**
+     * @var string
+     */
+    private $test;
+
+    public function __construct(Environment $twig, UrlGeneratorInterface $router, string $test)
     {
         $this->twig = $twig;
         $this->router = $router;
+        $this->test = $test;
     }
 
     /**
@@ -33,6 +40,7 @@ class HelloWorldController
         return new Response($this->twig->render('hello.html.twig', [
             'message' => 'Hello world.. enzo..',
             'route' => $this->router->generate('hello'),
+            'test' => $this->test,
         ]));
     }
 }
