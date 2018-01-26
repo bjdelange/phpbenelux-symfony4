@@ -51,6 +51,11 @@ class Locker
         return $this->id;
     }
 
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
     public function depositPackage(string $accessCode): void
     {
         if ($this->status !== self::FREE) {
