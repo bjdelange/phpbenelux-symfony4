@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Locker;
 use App\Repository\LockerRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,5 +28,17 @@ class LockerController extends Controller
     public function pickUpPackage(Request $request/*, LockerManager $lockerManager*/): Response
     {
         // jada jada
+    }
+
+    /**
+     * @Route("/locker/{number}", ...)
+     *
+     * of
+     *
+     * @Entity("locker", expr="repository.findInUseLocker(number)"})
+     */
+    public function locker(Locker $locker)
+    {
+
     }
 }
