@@ -5,6 +5,10 @@
 {% block body %}
     <h1>Lockers</h1>
 
+    {% if app.session.flashBag.has('warning') %}
+        {{ app.session.flashBag.get('warning') }}
+    {% endif %}
+
     <table>
         <thead>
             <tr>
@@ -21,4 +25,12 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <h1>Get package</h1>
+
+    <form method="post" action="{{ path('locker_deposit') }}">
+        <label>Number <input name="number" /></label>
+
+        <button type="submit">deposit</button>
+    </form>
 {% endblock %}
