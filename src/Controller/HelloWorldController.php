@@ -32,6 +32,7 @@ class HelloWorldController
     {
         return new Response($this->twig->render('hello.html.twig', [
             'message' => 'Hello world.. enzo..',
+            'route' => $this->router->generate('hello'),
         ]));
     }
 }
