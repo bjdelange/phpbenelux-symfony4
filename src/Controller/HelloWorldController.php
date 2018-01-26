@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 class HelloWorldController
@@ -14,9 +14,15 @@ class HelloWorldController
      */
     private $twig;
 
-    public function __construct(Environment $twig)
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $router;
+
+    public function __construct(Environment $twig, UrlGeneratorInterface $router)
     {
         $this->twig = $twig;
+        $this->router = $router;
     }
 
     /**
